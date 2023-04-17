@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using SecuGen.FDxSDKPro.Windows;
 
 namespace WindowsFormsApp1
@@ -110,7 +114,27 @@ namespace WindowsFormsApp1
                 // Handle the error (e.g., show an error message)
                 return null;
             }
-            
+            // Create a Bitmap from the captured image buffer
+            Bitmap fingerprintImage = new Bitmap(imageWidth, imageHeight, PixelFormat.Format8bppIndexed);
+
+            // Set the grayscale color palette for the Bitmap
+            ColorPalette palette = fingerprintImage.Palette;
+            for (int i = 0; i < 256; i++)
+            {
+                palette.Entries[i] = Color.FromArgb(i, i, i);
+            }
+            fingerprintImage.Palette = palette;
+
+            // Copy the image buffer to the Bitmap
+            var rect = new Rectangle(0, 0, imageWidth, imageHeight);
+            BitmapData bmpData = fingerprintImage.LockBits(rect, ImageLockMode.WriteOnly, fingerprintImage.PixelFormat);
+            IntPtr ptr = bmpData.Scan0;
+            int numBytes = bmpData.Stride * fingerprintImage.Height;
+            Marshal.Copy(imageBuffer, 0, ptr, numBytes);
+            fingerprintImage.UnlockBits(bmpData);
+
+            return fingerprintImage;
+
         }
         // Add other fingerprint scanner functionality methods here
     }
