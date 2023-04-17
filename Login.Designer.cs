@@ -29,6 +29,7 @@ namespace WindowsFormsApp1
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.txtUserID = new System.Windows.Forms.Label();
             this.txtPIN = new System.Windows.Forms.Label();
             this.textBoxID = new System.Windows.Forms.TextBox();
@@ -37,6 +38,8 @@ namespace WindowsFormsApp1
             this.btRegister = new System.Windows.Forms.Button();
             this.btLogin = new System.Windows.Forms.Button();
             this.atmLogin = new System.Windows.Forms.GroupBox();
+            this.btScanFingerprint = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picFingerprint)).BeginInit();
             this.atmLogin.SuspendLayout();
             this.SuspendLayout();
@@ -76,16 +79,18 @@ namespace WindowsFormsApp1
             // 
             // picFingerprint
             // 
-            this.picFingerprint.Location = new System.Drawing.Point(250, 193);
+            this.picFingerprint.Image = ((System.Drawing.Image)(resources.GetObject("picFingerprint.Image")));
+            this.picFingerprint.InitialImage = ((System.Drawing.Image)(resources.GetObject("picFingerprint.InitialImage")));
+            this.picFingerprint.Location = new System.Drawing.Point(248, 179);
             this.picFingerprint.Name = "picFingerprint";
-            this.picFingerprint.Size = new System.Drawing.Size(227, 143);
+            this.picFingerprint.Size = new System.Drawing.Size(229, 143);
             this.picFingerprint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picFingerprint.TabIndex = 4;
             this.picFingerprint.TabStop = false;
             // 
             // btRegister
             // 
-            this.btRegister.Location = new System.Drawing.Point(194, 412);
+            this.btRegister.Location = new System.Drawing.Point(194, 417);
             this.btRegister.Name = "btRegister";
             this.btRegister.Size = new System.Drawing.Size(136, 47);
             this.btRegister.TabIndex = 5;
@@ -94,7 +99,7 @@ namespace WindowsFormsApp1
             // 
             // btLogin
             // 
-            this.btLogin.Location = new System.Drawing.Point(377, 412);
+            this.btLogin.Location = new System.Drawing.Point(377, 416);
             this.btLogin.Name = "btLogin";
             this.btLogin.Size = new System.Drawing.Size(136, 47);
             this.btLogin.TabIndex = 6;
@@ -104,6 +109,8 @@ namespace WindowsFormsApp1
             // 
             // atmLogin
             // 
+            this.atmLogin.Controls.Add(this.label1);
+            this.atmLogin.Controls.Add(this.btScanFingerprint);
             this.atmLogin.Controls.Add(this.btLogin);
             this.atmLogin.Controls.Add(this.btRegister);
             this.atmLogin.Controls.Add(this.picFingerprint);
@@ -117,6 +124,25 @@ namespace WindowsFormsApp1
             this.atmLogin.TabIndex = 7;
             this.atmLogin.TabStop = false;
             this.atmLogin.Text = "AtmLogin";
+            // 
+            // btScanFingerprint
+            // 
+            this.btScanFingerprint.Location = new System.Drawing.Point(292, 359);
+            this.btScanFingerprint.Name = "btScanFingerprint";
+            this.btScanFingerprint.Size = new System.Drawing.Size(136, 47);
+            this.btScanFingerprint.TabIndex = 7;
+            this.btScanFingerprint.Text = "Scan";
+            this.btScanFingerprint.UseVisualStyleBackColor = true;
+            this.btScanFingerprint.Click += new System.EventHandler(this.btScanFingerprint_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(159, 327);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(398, 25);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Place finger on scanner then press scan";
             // 
             // Login
             // 
@@ -145,6 +171,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Button btRegister;
         private System.Windows.Forms.Button btLogin;
         private System.Windows.Forms.GroupBox atmLogin;
+        private System.Windows.Forms.Button btScanFingerprint;
+        private System.Windows.Forms.Label label1;
     }
 }
 

@@ -25,6 +25,11 @@ namespace WindowsFormsApp1
         {
             _fingerprintScanner.InitializeScanner();
         }
+        private void ScanFingerprint()
+        {
+            Bitmap scannedFingerprintImage = _fingerprintScanner.CaptureFingerprint();
+            picFingerprint.Image = scannedFingerprintImage;
+        }
 
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -54,10 +59,15 @@ namespace WindowsFormsApp1
             }
         }
 
-        // You will need to implement the AuthenticateUser method according to your specific requirements
+        // need to implement the AuthenticateUser method according to your specific requirements
         private bool AuthenticateUser(string userID, string pin, Bitmap scannedFingerprintImage)
         {
             // ...
+        }
+
+        private void btScanFingerprint_Click(object sender, EventArgs e)
+        {
+            ScanFingerprint();
         }
     }
 
@@ -82,6 +92,26 @@ namespace WindowsFormsApp1
             _fingerprintManager.Dispose();
         }
 
+        public Bitmap CaptureFingerprint()
+        {
+            int imageWidth, imageHeight;
+            byte[] imageBuffer = null;
+
+            // Get the image dimensions
+            _fingerprintManager.GetImageSize(out imageWidth, out imageHeight);
+
+            // Allocate memory for the image buffer
+            imageBuffer = new byte[imageWidth * imageHeight];
+
+            // Capture the fingerprint image
+            int result = _fingerprintManager.GetImage(imageBuffer);
+            if (result != (int)SGFPM_Error.ERROR_NONE)
+            {
+                // Handle the error (e.g., show an error message)
+                return null;
+            }
+            
+        }
         // Add other fingerprint scanner functionality methods here
     }
 }
