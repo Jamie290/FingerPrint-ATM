@@ -100,6 +100,7 @@ namespace WindowsFormsApp1
             this.btLogin.TabIndex = 6;
             this.btLogin.Text = "Login";
             this.btLogin.UseVisualStyleBackColor = true;
+            this.btLogin.Click += new System.EventHandler(this.btLogin_Click);
             // 
             // atmLogin
             // 
